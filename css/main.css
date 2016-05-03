@@ -1,5 +1,6 @@
 body {
 	font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+	background-color: #EEE;
 }
 
 div.title {
@@ -41,6 +42,10 @@ h2.subsection {
 
 .footer p {
 	font-size: 26px;
+}
+
+.footer img {
+	margin-top: -25%;
 }
 
 img.profile {

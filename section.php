@@ -1,33 +1,137 @@
 <?php 
 
+	class HTML_element {
+		private $type = "NULLELEMENT"; //type of element
+		private $attributes = array("class" => ""); // map of attr
+		private $children = array(); // array of inner children
+
+		function __construct($type_in) {
+			$this->type = $type_in;
+		}
+
+		public function render() {
+			$singleton_list = array("img", "meta", "link", "br");
+			echo "<" . $this->type . " ";
+			foreach($this->attributes as $attr => $val) {
+				if($val != "") {
+					echo $attr . "=\"" . $val . "\" ";
+				}
+			}
+
+			if(in_array($this->type, $singleton_list)) {
+				echo "/>\n";
+			} else {
+				echo ">";
+				foreach($this->children as $child) {
+					if(is_string($child)) { 
+						echo $child;
+					} else {
+						$child->render();
+					}
+				}
+				echo "</" . $this->type . ">"; 
+			}
+		}
+
+		public function attr($attr, $val) {
+			$this->attributes[$attr] = $val;
+			return $this;
+		}
+
+		public function text($text) {
+			array_push($this->children, $text);
+			return $this;
+		}
+
+		public function html($type_in) {
+			array_push($this->children, new HTML_element($type_in));
+			return array_slice($this->children, -1)[0];
+		}
+
+		private function contains($string, $values) {
+			foreach ($values as $value) {
+				if(strpos($string, $value) === false) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public function find($element, $classes = array()) {
+			$found_elements = array();
+			foreach($this->children as $child) {
+				if(!is_string($child) &&
+					$child->type == $element &&
+					$this->contains($child->attributes["class"], $classes)) {
+
+					array_push($found_elements, $child);
+					$in_child = $child->find($element, $classes);
+					foreach ($in_child as $elt) {
+						array_push($found_elements, $elt);
+					}
+				}
+			}
+			return $found_elements;
+		}
+	}
+
+
+	$servername = "localhost";
+	$username = "gapoorva_1";
+	$password = "mysql";
+	$dbname = "gapoorva_content";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	} 
+
+
 	function head_section() {
-		echo '<head>
-				<meta charset="utf-8">
-				<meta name="author" content="Apoorva Gupta">
-				<meta name="description" content="The personal website of Apoorva Gupta, Software Developer.">
-				<meta keywords="apoorva, gupta, software, developer, michigan, computer, science, programer, projects, project">
-				<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-				<meta property="og:url" content="http://www.apoorvagupta.com">
-				<meta property="og:title" content="Apoorva Gupta, Software Developer">
-				<meta property="og:description" content="The personal website of Apoorva Gupta, Software Developer.">
-				<meta property="og:site_name" content="Apoorva Gupta">
-				<!-- TODO:
-				<meta property="og:image" content="???">
-				 -->
 
-				<title>Apoorva Gupta</title>
+		$head = new HTML_element("head");
+		//Charset
+		$head->html("meta")->attr("charset", "utf-8");
+		//Description
+		$head->html("meta")->attr("name", "description")->attr("content", "the personal website of Apoorva Gupta, Software Developer.");
+		//Author
+		$head->html("meta")->attr("name", "author")->attr("content", "Apoorva Gupta");
+		//Keywords
+		$head->html("meta")->attr("keywords", "apoorva, gupta, software, developer, michigan, computer, science, programer, projects, project");
+		//HTTP-Equiv
+		$head->html("meta")->attr("http-equiv", "content-type")->attr("content", "text/html;charset=UTF-8");
+		//fb og:url
+		$head->html("meta")->attr("property","og:url")->attr("content", "http://www.apoorvagupta.com");
+		//fb og:title
+		$head->html("meta")->attr("property", "og:title")->attr("content", "Apoorva Gupta, Software Developer");
+		//fb og:description
+		$head->html("meta")->attr("property", "og:description")->attr("content", "The personal website of Apoorva Gupta, Software Developer.");
+		//fb og:site_name
+		$head->html("meta")->attr("property", "og:site_name")->attr("content", "Apoorva Gupta");
+		//fb og:image
+		$head->html("meta")->attr("property", "og:image")->attr("content", "images/profile-image.jpg");
 
-				<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+		//Title
+		$head->html("title")->text("Apoorva Gupta");
 
-				<link rel="stylesheet" type="text/css" href="css/jquery-ui.css"/>
-				<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-				<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"/>
-				<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		//Favicon
+		$head->html("link")->attr("rel", "shortcut icon")->attr("href", "images/favicon.ico")->attr("type", "image/x-icon");
 
-				<script type="text/javascript" src="js/jquery.min.js"></script>
-				<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-				<script type="text/javascript" src="js/bootstrap.min.js"></script>
-			</head>';
+		//Stylesheets
+		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/jquery-ui.css");
+		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/bootstrap.min.css");
+		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/bootstrap-theme.css");
+		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/main.css");
+
+		//Scripts
+		$head->html("script")->attr("type", "text/javascript")->attr("src", "js/jquery.min.js");
+		$head->html("script")->attr("type", "text/javascript")->attr("src", "js/jquery-ui.min.js");
+		$head->html("script")->attr("type", "text/javascript")->attr("src", "js/bootstrap.min.js");
+
+		$head->render();
 	}
 	
 	function page_title($title, $subsection = NULL) {
