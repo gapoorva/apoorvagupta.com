@@ -36,7 +36,7 @@ h2.subsection {
 	margin: 3% 0;
 }
 
-.footer a {
+.footer, .footer a {
 	color: gray;
 }
 
@@ -56,6 +56,20 @@ img.profile {
 .side-menu a {
 	color: #C23B22;
 	font-size: 30px;
+}
+
+div.admin {
+	background-color: #C23B22;
+	color: white;
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: 10px;
+	font-size: 21px;
+}
+
+div.admin p {
+	margin: 0 auto;
 }
 
 @media screen and (min-width: 768px) {

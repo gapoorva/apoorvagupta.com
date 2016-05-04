@@ -5,6 +5,7 @@
 	<?php head_section();?>
 
 	<body>
+		<?php $is_admin_mode = admin_mode();?>
 		<!-- FULL SCREEN CONTAINER -->
 		<div class="container-fluid">
 			<!-- PAGE TITLE -->

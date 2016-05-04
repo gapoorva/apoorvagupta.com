@@ -2,15 +2,16 @@
 
 	class HTML_element {
 		private $type = "NULLELEMENT"; //type of element
-		private $attributes = array("class" => ""); // map of attr
+		private $attributes = array(); // map of attr
 		private $children = array(); // array of inner children
+		private $parent = null;
 
 		function __construct($type_in) {
 			$this->type = $type_in;
 		}
 
 		public function render() {
-			$singleton_list = array("img", "meta", "link", "br");
+			$singleton_list = array("img", "meta", "link", "br", "input");
 			echo "<" . $this->type . " ";
 			foreach($this->attributes as $attr => $val) {
 				if($val != "") {
@@ -38,6 +39,10 @@
 			return $this;
 		}
 
+		public function get_attr($attr) {
+			return $this->attributes[$attr];
+		}
+
 		public function text($text) {
 			array_push($this->children, $text);
 			return $this;
@@ -45,7 +50,12 @@
 
 		public function html($type_in) {
 			array_push($this->children, new HTML_element($type_in));
+			array_slice($this->children, -1)[0]->parent =& $this;
 			return array_slice($this->children, -1)[0];
+		}
+
+		public function parent() {
+			return $this->parent;
 		}
 
 		private function contains($string, $values) {
@@ -57,19 +67,29 @@
 			return true;
 		}
 
-		public function find($element, $classes = array()) {
+		private function match($context, $selector) {
+			$select = explode(":", $selector);
+			return is_null($selector) || $context->contains($context->attributes[$select[0]], explode(" ", $select[1]));
+		}
+
+		public function find($element, $selector = null) {
 			$found_elements = array();
 			foreach($this->children as $child) {
-				if(!is_string($child) &&
-					$child->type == $element &&
-					$this->contains($child->attributes["class"], $classes)) {
+				
+				//var_dump($select);
+				if(!is_string($child) && $child->type == $element && $this->match($child, $selector)) {
 
+					//echo "doing this<br>";
 					array_push($found_elements, $child);
-					$in_child = $child->find($element, $classes);
+				}
+				if(!is_string($child)) {
+					$in_child = $child->find($element, $selector);
 					foreach ($in_child as $elt) {
 						array_push($found_elements, $elt);
 					}
 				}
+				
+				
 			}
 			return $found_elements;
 		}
@@ -89,10 +109,52 @@
 	    die("Connection failed: " . $conn->connect_error);
 	} 
 
+	function validate_access($conn, $column, $valuetocheck, $check_time = FALSE) {
+		// Checks if $column is in access table
+		$TIMEOUT = 3600;
+		$now = $check_time ? time() - $TIMEOUT : 0;
+
+		$stmt = $conn->prepare('SELECT pw, tok, ts FROM access WHERE '. $column . "=? AND ts > ?");
+		$stmt->bind_param('si', $valuetocheck, $now);
+
+		$stmt->execute();
+		$stmt->bind_result($pw, $tok, $ts);
+
+		if($stmt->fetch()) {
+			return array($pw, $tok, $ts);
+		} else {
+			return array();
+		}
+
+	}
+
+	function update_access($conn, $column, $update_value, $typestr) {
+		$stmt = $conn->prepare('UPDATE access SET '. $column . '=?');
+		$stmt->bind_param($typestr, $update_value);
+
+		if(!$stmt->execute()) {
+			trigger_error($stmt->error, E_USER_ERROR);
+		}
+
+	}
+
+	function admin_mode($conn) {
+		$tok = $_GET['edit'];
+		$result = validate_access($conn, "tok", $tok, TRUE);
+		if(count($result) != 0) {
+			$note = new HTML_element("div");
+			$note->attr("class", "admin")->html("p")->text("Admin Mode");
+			$note->render();
+			return true;
+		}
+		return false;
+	}
+
 
 	function head_section() {
 
 		$head = new HTML_element("head");
+
 		//Charset
 		$head->html("meta")->attr("charset", "utf-8");
 		//Description
@@ -123,7 +185,7 @@
 		//Stylesheets
 		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/jquery-ui.css");
 		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/bootstrap.min.css");
-		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/bootstrap-theme.css");
+		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/bootstrap-theme.min.css");
 		$head->html("link")->attr("rel", "stylesheet")->attr("type", "text/css")->attr("href", "css/main.css");
 
 		//Scripts
@@ -135,44 +197,61 @@
 	}
 	
 	function page_title($title, $subsection = NULL) {
-		$out= '<div class="row">
-				<div class="col-sm-10 col-xs-offset-1 col-xs-10 title indent">
-					<h1>' . $title;
 
+		$row = new HTML_element("div");
+		$row->attr("class", "row");
+		$row->html("div")->attr("class", "col-sm-10 col-xs-offset-1 col-xs-10 title indent")->html("h1")->text($title);
 		if(!is_null($subsection)) {
-			$out .= '&nbsp;|&nbsp;</h1><h2 class="subsection">' . $subsection . '</h2>';
-		} else {
-			$out .= "</h1>";
+			$row->find("h1")[0]->text("&nbsp;|&nbsp;");
+			$row->find("div", "class:title")[0]->html("h2")->attr("class", "subsection")->text($subsection);
 		}
-				
-		$out .=		'</div>
-				</div>';	
-		echo $out;
+		$row->render();
 	}
 
 	function footer_section() {
-		echo '<div class="row footer">
-				<div class="col-xs-offset-1 col-xs-11 col-sm-2 col-md-3">
-					<p> © 2015-2016 Apoorva Gupta </p>
-				</div>
-				<div class="col-xs-offset-1 col-xs-6 col-sm-5 col-sm-offset-1 col-md-offset-1">
-					<p><a href="https://github.com/gapoorva">Github</a> &nbsp; <a href="https://www.facebook.com/guptaapoorva">Facebook</a> &nbsp; <a href="mailto:gapoorva@umich.edu">Email</a></p>
-				</div>
-				<div class="col-xs-offset-3  col-xs-1 col-sm-offset-1 col-md-offset-0"><a href="http://www.apoorvagupta.com"><img class="center-block" src="images/favicon.ico"></a></div>
-			</div>';
+		$copy_right = " © 2015-2016 Apoorva Gupta ";
+		$facebook_link = "https://www.facebook.com/guptaapoorva";
+		$github_link = "https://www.github.com/gapoorva";
+		$mail_link = "mailto:gapoorva@umich.edu";
+		$logo_link = "images/favicon.ico";
+
+		$footer = new HTML_element("div");
+		$footer->attr("class", "row footer");
+
+		$footer->html("div")->attr("class", "col-xs-offset-1 col-xs-11 col-sm-2 col-md-3")->html("p")->text($copy_right);
+
+		$footer
+			->html("div")->attr("class", "col-xs-offset-1 col-xs-6 col-sm-5 col-sm-offset-1 col-md-offset-1")
+			->html("p")->html("a")->attr("href", $github_link)->text("Github")
+			->parent()->text(" &nbsp; ")->html("a")->attr("href", $facebook_link)->text("Facebook")
+			->parent()->text(" &nbsp; ")->html("a")->attr("href", $mail_link)->text("Email");
+
+		$footer
+			->html("div")->attr("class", "col-xs-offset-3  col-xs-1 col-sm-offset-1 col-md-offset-0")
+			->html("a")->attr("href", "http://www.apoorvagupta.com")
+			->html("img")->attr("class", "center-block")->attr("src", "images/favicon.ico");
+
+		$footer->render();
 	}
 
 	function side_menu($include_picture = FALSE) {
-		$out = '';
+		$blog = "heres_what_i_think.php";
+		$current_work = "what_i_do.php";
+		$past_work = "what_ive_done.php";
+		$communicate = "communicate.php";
+
+		$wrapper = new HTML_element("div");
 		if($include_picture) {
-			$out .= '<img class="img-responsive profile" src="images/profile-image.jpg">';
-		}	
-		$out .=		'<p class="lead"><a href="#">Personal Blog</a></p>
-					<p class="lead"><a href="#">What I Do</a></p>
-					<p class="lead"><a href="#">What I\'ve Done</a></p>
-					<p class="lead"><a href="#">Communicate</a></p>
-				</div>';
-		echo $out;
+			$wrapper->html("img")->attr("class", "img-responsive profile")->attr("src", "images/profile-image.jpg");
+		} else {
+			$wrapper->html("p")->attr("class" ,"lead")->html("a")->attr("href", "index.php")->text("Home");
+		}
+		$wrapper->html("p")->attr("class", "lead")->html("a")->attr("href", $blog)->text("Blog");
+		$wrapper->html("p")->attr("class", "lead")->html("a")->attr("href", $current_work)->text("What I Do");
+		$wrapper->html("p")->attr("class", "lead")->html("a")->attr("href", $past_work)->text("What I've Done");
+		$wrapper->html("p")->attr("class", "lead")->html("a")->attr("href", $communicate)->text("Communicate");
+
+		$wrapper->render();
 	}
 
 	function home_page_content() {
