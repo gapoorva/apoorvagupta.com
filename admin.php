@@ -33,8 +33,14 @@
 			<?php page_title("Admin Mode");?>
 			<!-- PAGE CONTENT -->
 			<div class="row">
+				<div class="col-xs-offset-1 col-xs-12 col-md-offset-4 col-md-4 lead indent">
+					<a href="http://www.apoorvagupta.com/new/"> Not what you intended? Return to Home. </a>
+				</div>
+			</div>
+			<div class="row">
 				<!-- MAIN CONTENT -->
 				<div class="col-md-7 col-xs-offset-1 col-xs-6 indent">
+
 					<?php 
 						//home_page_content(); 
 						if(!$is_post) {
@@ -44,7 +50,6 @@
 								->html("div")->attr("class", "form-group ")
 									->html("label")->attr("for", "password")->text("Admin Mode Login")->parent()
 									->html("input")->attr("type", "password")->attr("class", "form-control ")->attr("name", "password")->attr("id", "password");
-							$form->html("input")->attr("type", "submit")->attr("class", "btn btn-success");
 
 							$form->render();
 						} else {
@@ -54,7 +59,6 @@
 								->html("div")->attr("class", "form-group ")
 									->html("label")->attr("for", "password")->text("Incorrect password. Please try again.")->parent()
 									->html("input")->attr("type", "password")->attr("class", "form-control ")->attr("name", "password")->attr("id", "password");
-							$form->html("input")->attr("type", "submit")->attr("class", "btn btn-success");
 
 							$form->render();
 						}
