@@ -1,11 +1,14 @@
-<?php include 'section.php';?>
+<?php 
+	include 'section.php';
+	$note = null;
+	$is_admin_mode = admin($conn, $note);
+?>
 <!DOCTYPE html>
 <html>
 	<!-- ALL HEAD CONTENT HERE -->
 	<?php head_section();?>
 
 	<body>
-		<?php $is_admin_mode = admin_mode($conn);?>
 		<!-- FULL SCREEN CONTAINER -->
 		<div class="container-fluid">
 			<!-- PAGE TITLE -->
@@ -15,6 +18,7 @@
 				<!-- MAIN CONTENT -->
 				<div class="col-md-7 col-xs-offset-1 col-xs-6 indent">
 					<?php home_page_content(); ?>
+					<?php if($is_admin_mode) {$note->render();}?>
 				</div>
 				<!-- SIDE MENU CONTENT -->
 				<div class="col-xs-offset-1 col-xs-3 col-sm-3 col-md-2 side-menu">

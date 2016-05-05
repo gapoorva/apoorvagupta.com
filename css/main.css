@@ -65,11 +65,27 @@ div.admin {
 	top: 0;
 	right: 0;
 	padding: 10px;
+	padding-left: 17.5px;
 	font-size: 21px;
+	border-bottom-left-radius: 15px; 
+	z-index: 100;
 }
 
 div.admin p {
 	margin: 0 auto;
+	display: inline;
+	padding-right: 10px;
+}
+
+div.admin a {
+	margin: 0 auto;
+	margin: 4px;
+	background-color: white;
+	color: #C23B22;
+	text-decoration: none;
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 @media screen and (min-width: 768px) {

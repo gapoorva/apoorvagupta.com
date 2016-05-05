@@ -1,5 +1,11 @@
 <?php 
 
+
+	//////////////////////////////////////////////////////////
+	///////////////////// HTML BUILDER ///////////////////////
+	//////////////////////////////////////////////////////////
+
+
 	class HTML_element {
 		private $type = "NULLELEMENT"; //type of element
 		private $attributes = array(); // map of attr
@@ -54,6 +60,11 @@
 			return array_slice($this->children, -1)[0];
 		}
 
+		public function add($HTML_OBJECT_IN) {
+			array_push($this->children, $HTML_OBJECT_IN);
+			return $this;
+		}
+
 		public function parent() {
 			return $this->parent;
 		}
@@ -94,6 +105,12 @@
 			return $found_elements;
 		}
 	}
+
+
+	//////////////////////////////////////////////////////////
+	///////////////////// DATEBASE API ///////////////////////
+	//////////////////////////////////////////////////////////
+
 
 
 	$servername = "localhost";
@@ -138,20 +155,70 @@
 
 	}
 
-	function admin_mode($conn) {
-		$tok = $_GET['edit'];
-		$result = validate_access($conn, "tok", $tok, TRUE);
-		if(count($result) != 0) {
+	function authenticate($conn, &$note) {
+		$tok = $_COOKIE['tok'];
+		$access = validate_access($conn, "tok", $tok, TRUE);
+		if(count($access) != 0) {
+
+			//update with new token
+			setcookie('tok', get_token($conn, $access));
+
+			//admin noted to visually verify is_admin
 			$note = new HTML_element("div");
 			$note->attr("class", "admin")->html("p")->text("Admin Mode");
-			$note->render();
+			$note->html("a")->text("Exit")->attr("href", "logout.php");
+			/*$note->html("script")->text("console.log('tok:', '".$tok."');");
+			$note->html("script")->text("console.log('newtok:', '".hash('sha256', $access[0]+$access[1]+strval($access[2]))."');");
+			$note->html("script")->text("console.log('access[0]:', '".$access[0]."');");
+			$note->html("script")->text("console.log('access[1]:', '".$access[1]."');");
+			$note->html("script")->text("console.log('access[2]:', '".$access[2]."');");*/
+			//$note->render();
 			return true;
 		}
 		return false;
 	}
 
+	function admin($conn, &$note) {
+		if(isset($_COOKIE['tok'])) {
+		/*if($_SERVER['REQUEST_METHOD'] == 'GET' && $_GET['admin'] == 'edit') {*/
+			return authenticate($conn, $note);
+		}
+		return false;
+	}
 
-	function head_section() {
+
+	//////////////////////////////////////////////////////////
+	////////////////////// UTILIIES //////////////////////////
+	//////////////////////////////////////////////////////////
+
+	function get_token($conn, $access) {
+		//Generate new token
+		$newtok = hash('sha256', $access[0]+$access[1]+strval($access[2]));
+		//update access table
+		update_access($conn, "tok", $newtok, "s");
+		update_access($conn, "ts", time(), "i");
+
+		return $newtok;
+
+	}
+
+	function is_ssl() {
+	    if ( isset($_SERVER['HTTPS']) ) {
+	        if ( 'on' == strtolower($_SERVER['HTTPS']) )
+	            return true;
+	        if ( '1' == $_SERVER['HTTPS'] )
+	            return true;
+	    } elseif ( isset($_SERVER['SERVER_PORT']) && ( '443' == $_SERVER['SERVER_PORT'] ) ) {
+	        return true;
+	    }
+	    return false;
+	}
+
+	//////////////////////////////////////////////////////////
+	/////////////////// CONTENT CREATION /////////////////////
+	//////////////////////////////////////////////////////////
+
+	function get_head_section() {
 
 		$head = new HTML_element("head");
 
@@ -193,10 +260,14 @@
 		$head->html("script")->attr("type", "text/javascript")->attr("src", "js/jquery-ui.min.js");
 		$head->html("script")->attr("type", "text/javascript")->attr("src", "js/bootstrap.min.js");
 
-		$head->render();
+		return $head;
 	}
-	
-	function page_title($title, $subsection = NULL) {
+
+	function head_section($is_admin = false) {
+		get_head_section()->render();
+	}
+
+	function get_page_title($title, $subsection = NULL) {
 
 		$row = new HTML_element("div");
 		$row->attr("class", "row");
@@ -205,10 +276,15 @@
 			$row->find("h1")[0]->text("&nbsp;|&nbsp;");
 			$row->find("div", "class:title")[0]->html("h2")->attr("class", "subsection")->text($subsection);
 		}
+		return $row;
 		$row->render();
 	}
 
-	function footer_section() {
+	function page_title($title, $is_admin = false, $subsection = NULL) {
+		get_page_title($title, $subsection)->render();
+	}
+
+	function get_footer_section() {
 		$copy_right = " © 2015-2016 Apoorva Gupta ";
 		$facebook_link = "https://www.facebook.com/guptaapoorva";
 		$github_link = "https://www.github.com/gapoorva";
@@ -228,13 +304,17 @@
 
 		$footer
 			->html("div")->attr("class", "col-xs-offset-3  col-xs-1 col-sm-offset-1 col-md-offset-0")
-			->html("a")->attr("href", "http://www.apoorvagupta.com")
+			->html("a")->attr("href", "https://gator4221.hostgator.com/~gapoorva/new/admin.php")
 			->html("img")->attr("class", "center-block")->attr("src", "images/favicon.ico");
-
-		$footer->render();
+		
+		return $footer;
 	}
 
-	function side_menu($include_picture = FALSE) {
+	function footer_section() {
+		get_footer_section()->render();
+	}
+
+	function get_side_menu($include_picture = FALSE) {
 		$blog = "heres_what_i_think.php";
 		$current_work = "what_i_do.php";
 		$past_work = "what_ive_done.php";
@@ -251,7 +331,11 @@
 		$wrapper->html("p")->attr("class", "lead")->html("a")->attr("href", $past_work)->text("What I've Done");
 		$wrapper->html("p")->attr("class", "lead")->html("a")->attr("href", $communicate)->text("Communicate");
 
-		$wrapper->render();
+		return $wrapper;
+	}
+
+	function side_menu($include_picture = FALSE) {
+		get_side_menu($include_picture)->render();
 	}
 
 	function home_page_content() {
