@@ -4,9 +4,9 @@ body {
 }
 
 div.title {
-	border-bottom: 2px solid #4CAEE3;
+	border-bottom: 1px solid #4CAEE3;
 	padding-top: 1%;
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 	margin-bottom: 3%;
 }
 
@@ -15,12 +15,13 @@ div.title {
 }
 
 h1 {
-	font-size: 65px;
+	font-size: 75px;
 }
 
 h2.subsection {
-	font-size: 55px;
+	font-size: 65px;
 	color: 	#C23B22;
+	display: inline;
 }
 
 
@@ -88,18 +89,35 @@ div.admin a {
 	padding-right: 10px;
 }
 
+.temp-form {
+	display: inline;
+	width: 80%
+}
+
+.content-item {
+	background-color: white;
+	padding: 20px;
+}
+
+.blog-card,
+.blog-card:hover {
+	color: black;
+	text-decoration: none;
+}
+
+
 @media screen and (min-width: 768px) {
 	.lead {
 		font-size: 31px;
 	}
 	h1 {
-		font-size: 60px;
+		font-size: 70px;
 		display: inline-block;
 	}
 	h2.subsection {
-		font-size: 50px;
+		font-size: 60px;
 		color: 	#C23B22;
-		display: inline-block;
+		display: inline;
 	}
 	.footer p {
 		font-size: 26px;

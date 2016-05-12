@@ -13,7 +13,7 @@
 			if(count($access) != 0) {
 				//Authentication successful go to index with admin view
 				setcookie('tok', get_token($conn, $access));
-				header("Location: index.php");
+				header("Location: ".$_REQUEST['target']);
 				die();
 			} 
 		} // END IF POST REQUEST HANDLING
@@ -49,7 +49,8 @@
 							$form->attr("method", "POST")->attr("class", "col-xs-12 col-md-offset-4 col-md-4")
 								->html("div")->attr("class", "form-group ")
 									->html("label")->attr("for", "password")->text("Admin Mode Login")->parent()
-									->html("input")->attr("type", "password")->attr("class", "form-control ")->attr("name", "password")->attr("id", "password");
+									->html("input")->attr("type", "password")->attr("class", "form-control ")->attr("name", "password")->attr("id", "password")->parent()
+									->html("input")->attr("type", "hidden")->attr("value", urldecode($_REQUEST['src']))->attr("name", "target")->attr("id", "target");
 
 							$form->render();
 						} else {
@@ -58,7 +59,8 @@
 							$form->attr("method", "POST")->attr("class", "col-xs-12 col-md-offset-4 col-md-4 bg-danger")
 								->html("div")->attr("class", "form-group ")
 									->html("label")->attr("for", "password")->text("Incorrect password. Please try again.")->parent()
-									->html("input")->attr("type", "password")->attr("class", "form-control ")->attr("name", "password")->attr("id", "password");
+									->html("input")->attr("type", "password")->attr("class", "form-control ")->attr("name", "password")->attr("id", "password")->parent()
+									->html("input")->attr("type", "hidden")->attr("value", urldecode($_REQUEST['src']))->attr("name", "target")->attr("id", "target");
 
 							$form->render();
 						}
@@ -71,7 +73,9 @@
 				</div>
 			</div>
 			<!-- FOOTER -->
-			<?php footer_section(); ?>
+			<?php 
+			$this_page =  strlen($_SERVER['QUERY_STRING']) ? basename($_SERVER['PHP_SELF'])."?".$_SERVER['QUERY_STRING'] : basename($_SERVER['PHP_SELF']);
+			footer_section($this_page); ?>
 		</div>
 	</body>
 </html>

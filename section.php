@@ -280,11 +280,11 @@
 		$row->render();
 	}
 
-	function page_title($title, $is_admin = false, $subsection = NULL) {
+	function page_title($title, $subsection = NULL, $is_admin = false) {
 		get_page_title($title, $subsection)->render();
 	}
 
-	function get_footer_section() {
+	function get_footer_section($this_page) {
 		$copy_right = " © 2015-2016 Apoorva Gupta ";
 		$facebook_link = "https://www.facebook.com/guptaapoorva";
 		$github_link = "https://www.github.com/gapoorva";
@@ -304,14 +304,14 @@
 
 		$footer
 			->html("div")->attr("class", "col-xs-offset-3  col-xs-1 col-sm-offset-1 col-md-offset-0")
-			->html("a")->attr("href", "https://gator4221.hostgator.com/~gapoorva/new/admin.php")
+			->html("a")->attr("href", "https://gator4221.hostgator.com/~gapoorva/new/admin.php?src=".urlencode($this_page))
 			->html("img")->attr("class", "center-block")->attr("src", "images/favicon.ico");
 		
 		return $footer;
 	}
 
-	function footer_section() {
-		get_footer_section()->render();
+	function footer_section($this_page) {
+		get_footer_section($this_page)->render();
 	}
 
 	function get_side_menu($include_picture = FALSE) {
@@ -334,21 +334,23 @@
 		return $wrapper;
 	}
 
-	function side_menu($include_picture = FALSE) {
+	function side_menu($include_picture = FALSE, $is_admin = FALSE) {
 		get_side_menu($include_picture)->render();
 	}
 
-	function home_page_content() {
-		echo '<p class="lead"> A young software developer based in the United States.</p>
-					<br>
-					<p class="lead">Pursing a Bachelor’s Degree in Computer Science at the <a href="https://www.umich.edu" target="_blank">University of Michigan</a> and working at <a href="https://www.qualtrics.com" target="_blank">Qualtrics Labs.</a></p>
-					<br>
-					<p class="lead">Likes to code, travel, hike, cook, and eat.</p>
-					<br>
-					<p class="lead">Works on lots of cool things that you should check out.</p>
-					<br>
-					<p class="lead">Likes meeting new people and making new experiences. Most importantly, likes doing things that help others.</p>
-					<br>
-					<p class="lead">Looking to connect with like minded people, employers, and the curious visitor.</p>';
+	function get_content($conn, $content, $is_admin = FALSE) {
+		$stmt = $conn->prepare("SELECT filename FROM content WHERE pagename=?");
+		$stmt->bind_param("s", $content);
+		$stmt->execute();
+		$stmt->bind_result($filename);
+
+		if($stmt->fetch()) {
+			if($is_admin) {
+				echo '<p class="lead"><b><a href="edit.php?page='.urlencode($content).'"> Edit this content </a></b></p>';
+			}
+			include $filename;
+		} else {
+			die("filename for content '".$content."' was not found");
+		}
 	}
 ?>
