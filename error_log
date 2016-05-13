@@ -1,0 +1,91 @@
+[02-May-2016 22:06:23 America/Chicago] PHP Fatal error:  Cannot access empty property in /home1/gapoorva/public_html/new/section.php on line 11
+[02-May-2016 22:33:57 America/Chicago] PHP Fatal error:  Cannot access empty property in /home1/gapoorva/public_html/new/section.php on line 11
+[02-May-2016 22:34:07 America/Chicago] PHP Fatal error:  Cannot access empty property in /home1/gapoorva/public_html/new/section.php on line 11
+[02-May-2016 22:35:11 America/Chicago] PHP Fatal error:  Cannot access empty property in /home1/gapoorva/public_html/new/section.php on line 11
+[02-May-2016 22:37:48 America/Chicago] PHP Fatal error:  Cannot access empty property in /home1/gapoorva/public_html/new/section.php on line 11
+[02-May-2016 22:38:56 America/Chicago] PHP Fatal error:  Cannot access empty property in /home1/gapoorva/public_html/new/section.php on line 41
+[02-May-2016 22:42:05 America/Chicago] PHP Warning:  in_array() expects at least 2 parameters, 1 given in /home1/gapoorva/public_html/new/section.php on line 20
+[02-May-2016 22:43:12 America/Chicago] PHP Warning:  in_array() expects parameter 2 to be array, string given in /home1/gapoorva/public_html/new/section.php on line 20
+[02-May-2016 22:44:07 America/Chicago] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/gapoorva/public_html/new/section.php on line 20
+[02-May-2016 22:46:09 America/Chicago] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home1/gapoorva/public_html/new/section.php on line 19
+[02-May-2016 22:59:46 America/Chicago] PHP Fatal error:  Class 'HTML' not found in /home1/gapoorva/public_html/new/section.php on line 45
+[02-May-2016 23:00:06 America/Chicago] PHP Fatal error:  Call to a member function find() on a non-object in /home1/gapoorva/public_html/new/what_i_do.php on line 19
+[02-May-2016 23:00:48 America/Chicago] PHP Fatal error:  Call to undefined function contains() in /home1/gapoorva/public_html/new/section.php on line 63
+[02-May-2016 23:01:05 America/Chicago] PHP Fatal error:  Call to undefined method HTML_element::print() in /home1/gapoorva/public_html/new/section.php on line 27
+[02-May-2016 23:54:48 America/Chicago] PHP Fatal error:  Call to undefined method HTML_element::print_output() in /home1/gapoorva/public_html/new/section.php on line 29
+[03-May-2016 13:57:34 America/Chicago] PHP Parse error:  syntax error, unexpected '{' in /home1/gapoorva/public_html/new/section.php on line 66
+[03-May-2016 13:57:54 America/Chicago] PHP Fatal error:  Call to a member function text() on a non-object in /home1/gapoorva/public_html/new/section.php on line 145
+[03-May-2016 13:59:48 America/Chicago] PHP Fatal error:  Call to a member function text() on a non-object in /home1/gapoorva/public_html/new/section.php on line 146
+[03-May-2016 14:01:17 America/Chicago] PHP Fatal error:  Call to a member function text() on a non-object in /home1/gapoorva/public_html/new/section.php on line 146
+[03-May-2016 14:01:21 America/Chicago] PHP Fatal error:  Call to a member function text() on a non-object in /home1/gapoorva/public_html/new/section.php on line 146
+[03-May-2016 14:01:22 America/Chicago] PHP Fatal error:  Call to a member function text() on a non-object in /home1/gapoorva/public_html/new/section.php on line 146
+[03-May-2016 14:03:59 America/Chicago] PHP Fatal error:  Call to a member function find() on a non-object in /home1/gapoorva/public_html/new/section.php on line 70
+[03-May-2016 14:04:19 America/Chicago] PHP Fatal error:  Call to a member function find() on a non-object in /home1/gapoorva/public_html/new/section.php on line 71
+[03-May-2016 14:05:03 America/Chicago] PHP Fatal error:  Call to a member function find() on a non-object in /home1/gapoorva/public_html/new/section.php on line 71
+[03-May-2016 14:10:52 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 156
+[03-May-2016 14:11:22 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 156
+[03-May-2016 14:11:32 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 156
+[03-May-2016 14:13:20 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 159
+[03-May-2016 14:15:10 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 162
+[03-May-2016 14:16:11 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 162
+[03-May-2016 14:16:14 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 162
+[03-May-2016 14:16:28 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 162
+[03-May-2016 14:17:37 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 163
+[03-May-2016 14:21:03 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 164
+[03-May-2016 14:22:19 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 164
+[03-May-2016 14:23:24 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 165
+[03-May-2016 14:24:28 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 166
+[03-May-2016 14:26:06 America/Chicago] PHP Fatal error:  Call to a member function html() on a non-object in /home1/gapoorva/public_html/new/section.php on line 168
+[03-May-2016 14:57:24 America/Chicago] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/gapoorva/public_html/new/section.php on line 172
+[03-May-2016 17:41:35 America/Chicago] PHP Parse error:  syntax error, unexpected '"lead"' (T_CONSTANT_ENCAPSED_STRING) in /home1/gapoorva/public_html/new/section.php on line 206
+[03-May-2016 18:14:12 America/Chicago] PHP Fatal error:  Call to undefined method HTML_element::id() in /home1/gapoorva/public_html/new/admin.php on line 22
+[03-May-2016 20:46:16 America/Chicago] PHP Fatal error:  Call to a member function close() on a non-object in /home1/gapoorva/public_html/new/admin.php on line 50
+[03-May-2016 21:52:55 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home1/gapoorva/public_html/new/section.php on line 258
+[03-May-2016 21:54:06 America/Chicago] PHP Fatal error:  Call to a member function prepare() on a non-object in /home1/gapoorva/public_html/new/section.php on line 117
+[03-May-2016 22:07:43 America/Chicago] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home1/gapoorva/public_html/new/admin.php on line 41
+[03-May-2016 22:08:31 America/Chicago] PHP Warning:  hash(): Unknown hashing algorithm: sha265 in /home1/gapoorva/public_html/new/admin.php on line 32
+[03-May-2016 22:08:31 America/Chicago] PHP Fatal error:  Call to a member function render() on a non-object in /home1/gapoorva/public_html/new/section.php on line 30
+[03-May-2016 22:13:52 America/Chicago] PHP Warning:  mysqli_stmt::bind_param(): Number of elements in type definition string doesn't match number of bind variables in /home1/gapoorva/public_html/new/section.php on line 133
+[03-May-2016 22:13:52 America/Chicago] PHP Fatal error:  No data supplied for parameters in prepared statement in /home1/gapoorva/public_html/new/section.php on line 136
+[03-May-2016 22:34:05 America/Chicago] PHP Fatal error:  Call to a member function prepare() on a non-object in /home1/gapoorva/public_html/new/section.php on line 117
+[04-May-2016 07:53:54 America/Chicago] PHP Warning:  Missing argument 1 for admin_mode(), called in /home1/gapoorva/public_html/new/communicate.php on line 8 and defined in /home1/gapoorva/public_html/new/section.php on line 141
+[04-May-2016 07:53:54 America/Chicago] PHP Fatal error:  Call to a member function prepare() on a non-object in /home1/gapoorva/public_html/new/section.php on line 117
+[04-May-2016 09:45:09 America/Chicago] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home1/gapoorva/public_html/new/admin.php on line 62
+[04-May-2016 10:36:47 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/gapoorva/public_html/new/admin.php:6) in /home1/gapoorva/public_html/new/admin.php on line 39
+[04-May-2016 19:37:47 America/Chicago] PHP Parse error:  syntax error, unexpected '<' in /home1/gapoorva/public_html/new/index.php on line 22
+[04-May-2016 20:29:05 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/gapoorva/public_html/new/section.php:195) in /home1/gapoorva/public_html/new/admin.php on line 15
+[04-May-2016 20:29:05 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/gapoorva/public_html/new/section.php:195) in /home1/gapoorva/public_html/new/admin.php on line 16
+[04-May-2016 20:30:22 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/gapoorva/public_html/new/section.php:195) in /home1/gapoorva/public_html/new/admin.php on line 15
+[04-May-2016 20:30:22 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/gapoorva/public_html/new/section.php:195) in /home1/gapoorva/public_html/new/admin.php on line 16
+[05-May-2016 22:17:35 America/Chicago] PHP Fatal error:  Call to undefined function admin_mode() in /home1/gapoorva/public_html/new/what_ive_done.php on line 8
+[09-May-2016 19:56:13 America/Chicago] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home1/gapoorva/public_html/new/section.php on line 343
+[09-May-2016 20:09:17 America/Chicago] PHP Warning:  exec() expects at least 1 parameter, 0 given in /home1/gapoorva/public_html/new/edit.php on line 35
+[09-May-2016 20:09:17 America/Chicago] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home1/gapoorva/public_html/new/section.php on line 343
+[09-May-2016 20:09:53 America/Chicago] PHP Warning:  exec() expects at least 1 parameter, 0 given in /home1/gapoorva/public_html/new/edit.php on line 35
+[09-May-2016 20:10:04 America/Chicago] PHP Warning:  exec() expects at least 1 parameter, 0 given in /home1/gapoorva/public_html/new/edit.php on line 35
+[09-May-2016 20:10:12 America/Chicago] PHP Warning:  exec() expects at least 1 parameter, 0 given in /home1/gapoorva/public_html/new/edit.php on line 35
+[09-May-2016 20:57:05 America/Chicago] PHP Warning:  fopen(): Filename cannot be empty in /home1/gapoorva/public_html/new/edit.php on line 11
+[09-May-2016 20:59:51 America/Chicago] PHP Warning:  include(): Filename cannot be empty in /home1/gapoorva/public_html/new/edit.php on line 53
+[09-May-2016 20:59:51 America/Chicago] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/php54/lib/php') in /home1/gapoorva/public_html/new/edit.php on line 53
+[09-May-2016 20:59:51 America/Chicago] PHP Warning:  include(): Filename cannot be empty in /home1/gapoorva/public_html/new/edit.php on line 75
+[09-May-2016 20:59:51 America/Chicago] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/php54/lib/php') in /home1/gapoorva/public_html/new/edit.php on line 75
+[09-May-2016 20:59:53 America/Chicago] PHP Warning:  fopen(): Filename cannot be empty in /home1/gapoorva/public_html/new/edit.php on line 11
+[09-May-2016 21:00:20 America/Chicago] PHP Warning:  include(): Filename cannot be empty in /home1/gapoorva/public_html/new/edit.php on line 54
+[09-May-2016 21:00:20 America/Chicago] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/php54/lib/php') in /home1/gapoorva/public_html/new/edit.php on line 54
+[09-May-2016 21:00:20 America/Chicago] PHP Warning:  include(): Filename cannot be empty in /home1/gapoorva/public_html/new/edit.php on line 76
+[09-May-2016 21:00:20 America/Chicago] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/php54/lib/php') in /home1/gapoorva/public_html/new/edit.php on line 76
+[09-May-2016 21:00:22 America/Chicago] PHP Warning:  include(): Filename cannot be empty in /home1/gapoorva/public_html/new/edit.php on line 54
+[09-May-2016 21:00:22 America/Chicago] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/php54/lib/php') in /home1/gapoorva/public_html/new/edit.php on line 54
+[09-May-2016 21:00:22 America/Chicago] PHP Warning:  include(): Filename cannot be empty in /home1/gapoorva/public_html/new/edit.php on line 76
+[09-May-2016 21:00:22 America/Chicago] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/php54/lib/php') in /home1/gapoorva/public_html/new/edit.php on line 76
+[10-May-2016 22:13:36 America/Chicago] PHP Fatal error:  Call to a member function execute() on a non-object in /home1/gapoorva/public_html/new/heres_what_i_think.php on line 31
+[10-May-2016 22:16:18 America/Chicago] PHP Fatal error:  Call to a member function execute() on a non-object in /home1/gapoorva/public_html/new/heres_what_i_think.php on line 31
+[10-May-2016 22:16:49 America/Chicago] PHP Fatal error:  Call to a member function execute() on a non-object in /home1/gapoorva/public_html/new/heres_what_i_think.php on line 32
+[10-May-2016 22:16:51 America/Chicago] PHP Fatal error:  Call to a member function execute() on a non-object in /home1/gapoorva/public_html/new/heres_what_i_think.php on line 32
+[10-May-2016 22:16:53 America/Chicago] PHP Fatal error:  Call to a member function execute() on a non-object in /home1/gapoorva/public_html/new/heres_what_i_think.php on line 32
+[10-May-2016 22:17:26 America/Chicago] PHP Fatal error:  Call to a member function execute() on a non-object in /home1/gapoorva/public_html/new/heres_what_i_think.php on line 33
+[10-May-2016 22:18:25 America/Chicago] PHP Fatal error:  Call to a member function execute() on a non-object in /home1/gapoorva/public_html/new/heres_what_i_think.php on line 33
+[11-May-2016 18:21:14 America/Chicago] PHP Parse error:  syntax error, unexpected '<' in /home1/gapoorva/public_html/new/entry.php on line 136
+[11-May-2016 21:43:57 America/Chicago] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting ',' or ';' in /home1/gapoorva/public_html/new/heres_what_i_think.php on line 23
+[11-May-2016 22:05:53 America/Chicago] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home1/gapoorva/public_html/new/section.php on line 308
+[11-May-2016 22:06:13 America/Chicago] PHP Warning:  Missing argument 1 for footer_section(), called in /home1/gapoorva/public_html/new/admin.php on line 74 and defined in /home1/gapoorva/public_html/new/section.php on line 313

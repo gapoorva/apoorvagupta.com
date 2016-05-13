@@ -4,8 +4,8 @@
 <br>
 <p class="lead">Likes to code, travel, hike, cook, and eat.</p>
 <br>
-<p class="lead">Works on lots of cool things that you should check out.</p>
+<p class="lead">Works on interesting <a href="what_i_do.php">projects</a> that focus on a wide variety of topics.</p>
 <br>
-<p class="lead">Likes meeting new people and making new experiences. Most importantly, likes doing things that help others.</p>
+<p class="lead">Likes meeting new people and making new <a href="what_ive_done.php">experiences</a>. Most importantly, likes doing things that help others.</p>
 <br>
-<p class="lead">Looking to connect with like minded people, employers, and the curious visitor.</p>
+<p class="lead">Looking to <a href="communicate.php">connect</a> with like minded people, employers, and the curious visitor.</p>
