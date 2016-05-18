@@ -345,7 +345,7 @@
 
 		$footer
 			->html("div")->attr("class", "col-xs-offset-3  col-xs-1 col-sm-offset-1 col-md-offset-0")
-			->html("a")->attr("href", "https://gator4221.hostgator.com/~gapoorva/new/admin.php?src=".urlencode($this_page))
+			->html("a")->attr("href", "https://gator4221.hostgator.com/~gapoorva/admin.php?src=".urlencode($this_page))
 			->html("img")->attr("class", "center-block")->attr("src", "images/favicon.ico");
 		
 		return $footer;

@@ -34,7 +34,7 @@
 			<!-- PAGE CONTENT -->
 			<div class="row">
 				<div class="col-xs-offset-1 col-xs-12 col-md-offset-4 col-md-4 lead indent">
-					<a href="http://www.apoorvagupta.com/new/"> Not what you intended? Return to Home. </a>
+					<a href="http://www.apoorvagupta.com"> Not what you intended? Return to Home. </a>
 				</div>
 			</div>
 			<div class="row">
