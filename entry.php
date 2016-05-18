@@ -9,7 +9,8 @@
 	$found_entry = true;
 
 	//CREATE REQUEST (POST)
-	$create_id = "post".date("mdY");
+	$count_query = $conn->query("SELECT id FROM blog WHERE `id` LIKE 'post".date("mdY")."%'");
+	$create_id = "post".date("mdY").".".$count_query->num_rows;
 	$create_date = date("l F jS, Y | g:i a");
 	$create_title = $_REQUEST['title'];
 	$create_filepath = 'entries/'.$create_id.'.php';
@@ -41,6 +42,20 @@
 		if(!$stmt->execute()) {
 			die("write failed!");
 		}
+
+		//INSERT INVERTED INDEX CODE
+		$vector = vectorize(remove_punc(remove_tags($create_date." ".$create_title." ".$create_content)));
+		$sumsquared = 0;
+		foreach ($vector as $word => $magnitude) {
+			$sumsquared += $magnitude * $magnitude;
+		}
+		$stmt2 = $conn->prepare("INSERT INTO invindex (`id`, `word`, `magnitude`, `vector_magnitude`) VALUES (?, ?, ?, ?)");
+		$stmt2->bind_param("ssii", $create_id, $word, $magnitude, $sumsquared);
+
+		foreach ($vector as $word => $magnitude) {
+			$stmt2->execute();
+		}
+		
 		
 		//navigate to page view mode if all is well
 		header("Location: entry.php?id=".$create_id);
@@ -55,6 +70,24 @@
 		$stmt->bind_param("isss", time(), $create_lead, $create_title, $pageid);
 		if(!$stmt->execute()) {
 			die("update failed!");
+		}
+
+		//UPDATE INVERTED INDEX code
+		$vector = vectorize(remove_punc(remove_tags($create_date." ".$create_title." ".$create_content)));
+		$sumsquared = 0;
+		foreach ($vector as $word => $mag) {
+			$sumsquared += $mag * $mag;
+		}
+		//remove all old data
+		$stmt2 = $conn->prepare("DELETE FROM invindex WHERE id=?");
+		$stmt2->bind_param("s", $pageid);
+		$stmt2->execute();
+		//insert new data
+		$stmt3 = $conn->prepare("INSERT INTO invindex (`id`, `word`, `magnitude`, `vector_magnitude`) VALUES (?, ?, ?, ?)");
+		$stmt3->bind_param("ssii", $pageid, $word, $magnitude, $sumsquared);
+
+		foreach ($vector as $word => $magnitude) {
+			$stmt3->execute();
 		}
 
 		//navigate to page view mode if all is well
