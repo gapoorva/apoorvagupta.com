@@ -127,7 +127,7 @@
 							}
 						} else {
 							echo '<h2 style="margin-top:0">Recent Posts:</h2>';
-							$stmt = $conn->prepare('SELECT `title`, `lead`, `id`, `date` FROM blog ORDER BY ts DESC LIMIT 7');
+							$stmt = $conn->prepare('SELECT `title`, `lead`, `id`, `date` FROM blog ORDER BY ts DESC LIMIT 5');
 							$stmt->execute();
 							$stmt->bind_result($title, $lead, $id, $date);
 
