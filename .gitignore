@@ -2,3 +2,5 @@ node_modules/
 public/assets/
 public/bower_components/
 public/node_modules/
+public/css/
+public/js/
